@@ -36,6 +36,9 @@
     <Reference Include="MDK.KitV5">
       <HintPath>..\..\Libs\MDK.KitV5.dll</HintPath>
     </Reference>
+    <Reference Include="MDKDataReader.KernelInstance">
+      <HintPath>..\..\Libs\MDKDataReader.KernelInstance.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,6 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Instance\NetInterfaceRegCenter.cs" />
+    <Compile Include="View\NavListControl.xaml.cs">
+      <DependentUpon>NavListControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +75,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\NavListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\RelayCommand .cs" />
@@ -96,6 +107,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MDKDataReader.Kernel\MDKDataReader.Kernel.csproj">
+      <Project>{845f2a9b-ec85-42c9-8a36-ee120c855592}</Project>
+      <Name>MDKDataReader.Kernel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

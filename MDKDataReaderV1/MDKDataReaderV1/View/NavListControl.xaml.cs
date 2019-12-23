@@ -12,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MDKDataReaderV1
+namespace MDKDataReaderV1.View
 {
     /// <summary>
-    /// 数据浏览主窗口
+    /// 导航列表标签项控件（可分左右两部分区分）
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class NavListControl : UserControl
     {
-        public MainWindow()
+        public NavListControl()
         {
             InitializeComponent();
         }
