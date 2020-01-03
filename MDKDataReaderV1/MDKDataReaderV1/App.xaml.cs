@@ -21,13 +21,10 @@ namespace MDKDataReaderV1
             {
                 base.OnStartup(e);
 
-                //MDK.KitV5.Theme.InitTheme();
+                MDK.KitV5.Theme.InitTheme();
                 NetInterfaceRegCenter.RegAllInterface();
 
                 AnyLoggerManager.Info("开始启动...");
-
-                MainWindow wnd = new MainWindow();
-                wnd.Show();
             }
             catch (Exception ex)
             {

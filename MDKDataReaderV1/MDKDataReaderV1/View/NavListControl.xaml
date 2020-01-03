@@ -4,8 +4,108 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="400" d:DesignWidth="500">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <RadioButton Content="今天" Margin="5" VerticalAlignment="Center"/>
+            <RadioButton Content="本周" Margin="5" VerticalAlignment="Center"/>
+            <RadioButton Content="本月" Margin="5" VerticalAlignment="Center"/>
+            <RadioButton Content="上月" Margin="5" VerticalAlignment="Center"/>
+            <RadioButton Content="本年" Margin="5" VerticalAlignment="Center"/>
+            <RadioButton Content="上年" Margin="5" VerticalAlignment="Center"/>
+            <RadioButton Content="自定义" Margin="5" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <CheckBox Content="日期" Margin="5" VerticalAlignment="Center" />
+            <DatePicker Margin="10,5" Width="100"/>
+            <TextBlock Text="至" Margin="5" VerticalAlignment="Center"/>
+            <DatePicker Margin="10,5" Width="100"/>
+            <ComboBox SelectedIndex="0" Margin="10,5">
+                <ComboBoxItem Content="检查日期"/>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <CheckBox Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+            <ComboBox Grid.Column="1" Margin="5" VerticalAlignment="Center" Width="80" SelectedIndex="0">
+                <ComboBoxItem Content="姓名"/>
+                <ComboBoxItem Content="性别"/>
+                <ComboBoxItem Content="年龄"/>
+            </ComboBox>
+            <TextBlock Text="=" Margin="5" VerticalAlignment="Center"/>
+            <TextBox Margin="5" VerticalAlignment="Center" Width="180"/>
+            <CheckBox Content="包含" Margin="5" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <CheckBox Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+            <ComboBox Grid.Column="1" Margin="5" VerticalAlignment="Center" Width="80" SelectedIndex="0">
+                <ComboBoxItem Content="住院号"/>
+            </ComboBox>
+            <TextBlock Text="=" Margin="5" VerticalAlignment="Center"/>
+            <TextBox Margin="5" VerticalAlignment="Center" Width="180"/>
+            <CheckBox Content="包含" Margin="5" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Grid Grid.Row="4" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Margin="5" Header="检查类别">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="80" >
+
+                    <ItemsControl ItemsSource="{Binding lstCheckType}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding}" Margin="5"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+
+                </ScrollViewer>
+
+            </GroupBox>
+            <Button Grid.Column="1" Content="查询" Margin="5,15" VerticalAlignment="Top" Padding="10,5"/>
+        </Grid>
+
+        <DataGrid Name="dgPat" Grid.Row="5" ItemsSource="{Binding lstPatient}" VerticalScrollBarVisibility="Auto"
+                   AutoGenerateColumns="False" HeadersVisibility="Column" IsReadOnly="True" SelectionChanged="DataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="序号" Width="*" Binding="{Binding Index}"/>
+                <DataGridTextColumn Header="病人ID" Width="*" Binding="{Binding PatientID}" />
+                <DataGridTextColumn Header="姓名" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="性别" Width="*" Binding="{Binding Sex}" />
+                <DataGridTextColumn Header="年龄" Width="*" Binding="{Binding Age}"  />
+                <DataGridTextColumn Header="检查类别" Width="1.5*" Binding="{Binding CheckType}" />
+                <DataGridTextColumn Header="检查项目" Width="1.5*" Binding="{Binding CheckItem}" />
+                <DataGridTextColumn Header="住院号" Width="*" Binding="{Binding ZhuYuanNo}" />
+                <DataGridTextColumn Header="检查日期" Width="1.5*" Binding="{Binding CheckDate}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Content="返回" Margin="5" Padding="10,5"/>
+        </Grid>
     </Grid>
 </UserControl>

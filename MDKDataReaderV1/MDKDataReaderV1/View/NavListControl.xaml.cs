@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MDKDataReaderV1.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,24 @@ namespace MDKDataReaderV1.View
     /// </summary>
     public partial class NavListControl : UserControl
     {
+        public event Action<PatientModel> ChanngePatient = null;
+        QueryManager qryModel = null;
         public NavListControl()
         {
             InitializeComponent();
+            qryModel = new QueryManager();
+            qryModel.Init();
+            this.DataContext = qryModel;
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dg = sender as DataGrid;
+            PatientModel mo = dg.CurrentItem as PatientModel;
+            if (ChanngePatient != null)
+            {
+                ChanngePatient((sender as DataGrid).CurrentItem as PatientModel);
+            }
         }
     }
 }

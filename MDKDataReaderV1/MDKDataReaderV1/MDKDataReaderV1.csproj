@@ -59,10 +59,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Instance\NetInterfaceRegCenter.cs" />
+    <Compile Include="Model\PatientModel.cs" />
+    <Compile Include="Model\QueryManager.cs" />
+    <Compile Include="Model\QueryModel.cs" />
     <Compile Include="View\NavListControl.xaml.cs">
       <DependentUpon>NavListControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="wndMain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -71,8 +74,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\FieldToData.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="wndMain.xaml.cs">
+      <DependentUpon>wndMain.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\NavListControl.xaml">
