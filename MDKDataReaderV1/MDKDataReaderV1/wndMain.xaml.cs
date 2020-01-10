@@ -31,6 +31,9 @@ namespace MDKDataReaderV1
             
         }
         
+        /// <summary>
+        /// 当前病人信息
+        /// </summary>
         public PatientModel CurrentPatient { set; get; }
 
         void ChangePatient(PatientModel dCurrentPatient)

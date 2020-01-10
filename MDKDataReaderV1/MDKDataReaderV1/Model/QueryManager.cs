@@ -34,8 +34,8 @@ namespace MDKDataReaderV1.Model
             lstCheckType.Add("胃镜55");
             lstCheckType.Add("肠镜6");
             lstPatient = new ObservableCollection<PatientModel>();
-            lstPatient.Add(new PatientModel(1, 001, "AAA", "男", 20, "无痛胃镜", "电子无痛胃镜", 0002, "2019-12-20 14:10"));
-            lstPatient.Add(new PatientModel(2, 001, "BBB", "男", 20, "无痛胃镜", "电子无痛胃镜", 0002, "2019-12-20 14:10"));
+            lstPatient.Add(new PatientModel(1, 001, "AAA", "男", 20, "无痛胃镜", "电子无痛胃镜1211111", 0002, "2019-12-20 14:10"));
+            lstPatient.Add(new PatientModel(2, 001, "BBB", "男", 20, "无痛胃镜", "电子无痛胃镜111111111", 0002, "2019-12-20 14:10"));
             lstPatient.Add(new PatientModel(3, 001, "CCC", "男", 20, "无痛胃镜", "电子无痛胃镜", 0002, "2019-12-20 14:10"));
             lstPatient.Add(new PatientModel(4, 001, "DDD", "男", 20, "无痛胃镜", "电子无痛胃镜", 0002, "2019-12-20 14:10"));
             lstPatient.Add(new PatientModel(5, 001, "EEE", "男", 20, "无痛胃镜", "电子无痛胃镜", 0002, "2019-12-20 14:10"));

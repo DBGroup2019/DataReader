@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="500">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -16,7 +17,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
+        <WrapPanel Grid.Row="0" Orientation="Horizontal">
             <RadioButton Content="今天" Margin="5" VerticalAlignment="Center"/>
             <RadioButton Content="本周" Margin="5" VerticalAlignment="Center"/>
             <RadioButton Content="本月" Margin="5" VerticalAlignment="Center"/>
@@ -24,39 +25,60 @@
             <RadioButton Content="本年" Margin="5" VerticalAlignment="Center"/>
             <RadioButton Content="上年" Margin="5" VerticalAlignment="Center"/>
             <RadioButton Content="自定义" Margin="5" VerticalAlignment="Center"/>
-        </StackPanel>
+        </WrapPanel>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <CheckBox Content="日期" Margin="5" VerticalAlignment="Center" />
-            <DatePicker Margin="10,5" Width="100"/>
-            <TextBlock Text="至" Margin="5" VerticalAlignment="Center"/>
-            <DatePicker Margin="10,5" Width="100"/>
-            <ComboBox SelectedIndex="0" Margin="10,5">
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition MaxWidth="150"/>
+            </Grid.ColumnDefinitions>
+            <CheckBox Grid.Column="0" Content="日期" Margin="5" VerticalAlignment="Center" />
+            <DatePicker Grid.Column="1" Margin="5" />
+            <TextBlock Grid.Column="2" Text="至" Margin="5" VerticalAlignment="Center"/>
+            <DatePicker Grid.Column="3" Margin="5" />
+            <ComboBox Grid.Column="4" SelectedIndex="0" Margin="5">
                 <ComboBoxItem Content="检查日期"/>
             </ComboBox>
-        </StackPanel>
+        </Grid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
             <CheckBox Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
             <ComboBox Grid.Column="1" Margin="5" VerticalAlignment="Center" Width="80" SelectedIndex="0">
                 <ComboBoxItem Content="姓名"/>
                 <ComboBoxItem Content="性别"/>
                 <ComboBoxItem Content="年龄"/>
             </ComboBox>
-            <TextBlock Text="=" Margin="5" VerticalAlignment="Center"/>
-            <TextBox Margin="5" VerticalAlignment="Center" Width="180"/>
-            <CheckBox Content="包含" Margin="5" VerticalAlignment="Center"/>
-        </StackPanel>
+            <TextBlock Grid.Column="2" Text="=" Margin="5" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="3" Margin="5" VerticalAlignment="Center" />
+            <CheckBox Grid.Column="4" Content="包含" Margin="5" VerticalAlignment="Center"/>
+        </Grid>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
+        <Grid Grid.Row="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
             <CheckBox Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
             <ComboBox Grid.Column="1" Margin="5" VerticalAlignment="Center" Width="80" SelectedIndex="0">
                 <ComboBoxItem Content="住院号"/>
             </ComboBox>
-            <TextBlock Text="=" Margin="5" VerticalAlignment="Center"/>
-            <TextBox Margin="5" VerticalAlignment="Center" Width="180"/>
-            <CheckBox Content="包含" Margin="5" VerticalAlignment="Center"/>
-        </StackPanel>
+            <TextBlock Grid.Column="2"  Text="=" Margin="5" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="3"  Margin="5" VerticalAlignment="Center" />
+            <CheckBox Grid.Column="4"  Content="包含" Margin="5" VerticalAlignment="Center"/>
+        </Grid>
 
         <Grid Grid.Row="4" >
             <Grid.ColumnDefinitions>
@@ -85,27 +107,24 @@
             <Button Grid.Column="1" Content="查询" Margin="5,15" VerticalAlignment="Top" Padding="10,5"/>
         </Grid>
 
-        <DataGrid Name="dgPat" Grid.Row="5" ItemsSource="{Binding lstPatient}" VerticalScrollBarVisibility="Auto"
+        <DataGrid Name="dgPat" Grid.Row="5" ItemsSource="{Binding lstPatient}" VerticalScrollBarVisibility="Auto" 
                    AutoGenerateColumns="False" HeadersVisibility="Column" IsReadOnly="True" SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="序号" Width="*" Binding="{Binding Index}"/>
-                <DataGridTextColumn Header="病人ID" Width="*" Binding="{Binding PatientID}" />
-                <DataGridTextColumn Header="姓名" Width="*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="性别" Width="*" Binding="{Binding Sex}" />
-                <DataGridTextColumn Header="年龄" Width="*" Binding="{Binding Age}"  />
-                <DataGridTextColumn Header="检查类别" Width="1.5*" Binding="{Binding CheckType}" />
-                <DataGridTextColumn Header="检查项目" Width="1.5*" Binding="{Binding CheckItem}" />
-                <DataGridTextColumn Header="住院号" Width="*" Binding="{Binding ZhuYuanNo}" />
-                <DataGridTextColumn Header="检查日期" Width="1.5*" Binding="{Binding CheckDate}" />
+                <DataGridTextColumn Header="序号" Width="auto"  Binding="{Binding Index}"/>
+                <DataGridTextColumn Header="病人ID" Width="auto" Binding="{Binding PatientID}" />
+                <DataGridTextColumn Header="姓名" Width="auto" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="性别" Width="auto" Binding="{Binding Sex}" />
+                <DataGridTextColumn Header="年龄" Width="auto" Binding="{Binding Age}"  />
+                <DataGridTextColumn Header="检查类别" Width="auto" MaxWidth="100" Binding="{Binding CheckType}" />
+                <DataGridTextColumn Header="检查项目" Width="auto" MaxWidth="100" Binding="{Binding CheckItem}" />
+                <DataGridTextColumn Header="住院号" Width="auto" MaxWidth="100" Binding="{Binding ZhuYuanNo}" />
+                <DataGridTextColumn Header="检查日期" Width="auto" Binding="{Binding CheckDate}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <Grid Grid.Row="6">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Content="返回" Margin="5" Padding="10,5"/>
-        </Grid>
+        <StackPanel Grid.Row="6">
+            
+            <Button Content="返回" HorizontalAlignment="Right" Margin="5" Padding="20,5"/>
+        </StackPanel>
     </Grid>
 </UserControl>

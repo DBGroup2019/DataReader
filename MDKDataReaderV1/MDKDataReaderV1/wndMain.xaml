@@ -6,13 +6,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MDKDataReaderV1"
         mc:Ignorable="d"
-        Title="数据浏览Demo" Height="500" Width="900" WindowStartupLocation="CenterScreen">
+        Title="数据浏览Demo" Height="600" Width="950" WindowStartupLocation="CenterScreen" MinWidth="450" MinHeight="250">
     <mdk:MDKWindow.TitlePanel>
         <TextBlock Text="数据浏览Demo" VerticalAlignment="Center" Margin="-20,0"/>
     </mdk:MDKWindow.TitlePanel>
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1.5*" MinWidth="300"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TabControl>
@@ -24,6 +24,7 @@
             <TabItem Header="标签2">
             </TabItem>
         </TabControl>
+        <GridSplitter Grid.Column="1"  Width="1" HorizontalAlignment="Left"/>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
