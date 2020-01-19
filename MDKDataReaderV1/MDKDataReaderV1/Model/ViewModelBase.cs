@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MDKDataReaderV1.Model
 {
-    public class MDKDataReaderV1: INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string spropertyName)

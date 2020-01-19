@@ -42,7 +42,7 @@ namespace MDKDataReaderV1.Model
                 bool result = _canhandler(parameter);
                 //if (executeable != result)
                 //{
-                    executeable = result;
+                executeable = result;
 
                 //    if (CanExecuteChanged != null)
                 //        CanExecuteChanged(parameter, null);

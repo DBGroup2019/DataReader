@@ -20,24 +20,176 @@ namespace MDKDataReaderV1.View
     /// </summary>
     public partial class NavListControl : UserControl
     {
-        public event Action<PatientModel> ChanngePatient = null;
-        QueryManager qryModel = null;
+        public event Action<PatientModel> ChangePatient = null;    //选中datagrid行事件
+        QueryManager queryMgr = new QueryManager();
+
         public NavListControl()
         {
             InitializeComponent();
-            qryModel = new QueryManager();
-            qryModel.Init();
-            this.DataContext = qryModel;
+
+            try
+            {
+                queryMgr.Init();
+                this.DataContext = queryMgr;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            rdoWeek.IsChecked = true;
+            btnQuery_Click(null, null);
+        }
+
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dg = sender as DataGrid;
             PatientModel mo = dg.CurrentItem as PatientModel;
-            if (ChanngePatient != null)
+            if (ChangePatient != null)
             {
-                ChanngePatient((sender as DataGrid).CurrentItem as PatientModel);
+                ChangePatient(mo);
             }
         }
+
+        // 查询
+        private void btnQuery_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                QueryModel queries = new QueryModel();
+                if ((bool)ckbDate.IsChecked)
+                {
+                    queries.StartDate = DateTime.Parse(dpkStart.SelectedDate.ToString()).ToString("yyyy/MM/dd");
+                    queries.EndDate = DateTime.Parse(dpkEnd.SelectedDate.ToString()).ToString("yyyy/MM/dd");
+                    queries.DateType = cboDateType.SelectedValue.ToString();
+                }
+                if ((bool)ckbPar1.IsChecked)
+                {
+                    queries.QueryParam1Name = cboPar1.SelectedValue.ToString();
+                    queries.QueryParam1Value = txtPar1.Text;
+                    queries.QueryParam1IsContain = (bool)ckbContain1.IsChecked;
+                }
+                if ((bool)ckbPar2.IsChecked)
+                {
+                    queries.QueryParam2Name = cboPar2.SelectedValue.ToString();
+                    queries.QueryParam2Value = txtPar2.Text;
+                    queries.QueryParam2IsContain = (bool)ckbContain2.IsChecked;
+                }
+
+                foreach (var item in queryMgr.lstCheckType)
+                {
+                    if (item.IsChecked)
+                    {
+                        queries.CheckType.Add(item.Text);
+                    }
+                }
+
+                queryMgr.GetPatient(queries);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void rdoToday_Checked(object sender, RoutedEventArgs e)
+        {
+            dpkStart.SelectedDate = DateTime.Today;
+            dpkEnd.SelectedDate = DateTime.Today;
+
+            ckbDate.IsChecked = true;
+        }
+
+        private void rdoWeek_Checked(object sender, RoutedEventArgs e)
+        {
+            DateTime nowTime = DateTime.Now;
+
+            //星期一为第一天  
+            int weeknow = Convert.ToInt32(nowTime.DayOfWeek);
+
+            //因为是以星期一为第一天，所以要判断weeknow等于0时，要向前推6天。  
+            weeknow = (weeknow == 0 ? (7 - 1) : (weeknow - 1));
+            int daydiff = (-1) * weeknow;
+
+            //本周第一天  
+            DateTime startWeek = nowTime.AddDays(daydiff);
+
+            //星期天为最后一天  
+            int lastWeekDay = Convert.ToInt32(nowTime.DayOfWeek);
+            lastWeekDay = lastWeekDay == 0 ? (7 - lastWeekDay) : lastWeekDay;
+            int lastWeekDiff = (7 - lastWeekDay);
+
+            //本周最后一天  
+            DateTime endWeek = nowTime.AddDays(lastWeekDiff);
+
+            dpkStart.SelectedDate = startWeek;
+            dpkEnd.SelectedDate = endWeek;
+
+            ckbDate.IsChecked = true;
+        }
+
+        private void rdoMonth_Checked(object sender, RoutedEventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            DateTime startMonth = dt.AddDays(1 - dt.Day);             //本月初
+            DateTime endMonth = startMonth.AddMonths(1).AddDays(-1);  //本月末
+
+            dpkStart.SelectedDate = startMonth;
+            dpkEnd.SelectedDate = endMonth;
+
+            ckbDate.IsChecked = true;
+        }
+
+        private void rdoLastMonth_Checked(object sender, RoutedEventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            dt = dt.AddMonths(-1);
+            DateTime startLastMonth = dt.AddDays(1 - dt.Day);             //本月初
+            DateTime endLastMonth = startLastMonth.AddMonths(1).AddDays(-1);  //本月末
+
+            dpkStart.SelectedDate = startLastMonth;
+            dpkEnd.SelectedDate = endLastMonth;
+
+            ckbDate.IsChecked = true;
+        }
+
+        private void rdoYear_Checked(object sender, RoutedEventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            DateTime startYear = new DateTime(dt.Year, 1, 1);  //本年初
+            DateTime endYear = new DateTime(dt.Year, 12, 31);  //本年末
+
+            dpkStart.SelectedDate = startYear;
+            dpkEnd.SelectedDate = endYear;
+
+            ckbDate.IsChecked = true;
+        }
+
+        private void rdoLastYear_Checked(object sender, RoutedEventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            dt = dt.AddYears(-1);
+            DateTime startLastYear = new DateTime(dt.Year, 1, 1);  //上年初
+            DateTime endLastYear = new DateTime(dt.Year, 12, 31);  //上年末
+
+            dpkStart.SelectedDate = startLastYear;
+            dpkEnd.SelectedDate = endLastYear;
+
+            ckbDate.IsChecked = true;
+        }
+
+        private void rdoCustom_Checked(object sender, RoutedEventArgs e)
+        {
+            ckbDate.IsChecked = true;
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
     }
 }
