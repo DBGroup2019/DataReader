@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MDKDataReaderV1.Model
 {
+    /// <summary>
+    /// 表格数据模型
+    /// </summary>
     public class PatientModel
     {
         /// <summary>

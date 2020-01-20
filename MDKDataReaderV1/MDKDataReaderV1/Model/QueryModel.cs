@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MDKDataReaderV1.Model
 {
+    /// <summary>
+    /// 查询条件模型
+    /// </summary>
     public class QueryModel
     {
         /// <summary>
