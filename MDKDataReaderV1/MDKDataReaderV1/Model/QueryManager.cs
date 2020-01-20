@@ -15,33 +15,35 @@ namespace MDKDataReaderV1.Model
         /// <summary>
         /// 查询日期类型
         /// </summary>
-        public ObservableCollection<KeyValuePair<string, string>> DateType { get; set; }
+        public ObservableCollection<KeyValueModel<string, string>> DateType { get; set; }
         /// <summary>
         /// 自定义查询1字段名称
         /// </summary>
-        public ObservableCollection<KeyValuePair<string, string>> QueryParam1Name { get; set; }
+        public ObservableCollection<KeyValueModel<string, string>> QueryParam1Name { get; set; }
         /// <summary>
         /// 自定义查询2字段名称
         /// </summary>
-        public ObservableCollection<KeyValuePair<string, string>> QueryParam2Name { get; set; }
+        public ObservableCollection<KeyValueModel<string, string>> QueryParam2Name { get; set; }
         /// <summary>
         /// 病人信息
         /// </summary>
-        public ObservableCollection<PatientModel> lstPatient { set; get; }
+        public ObservableCollection<PatientModel> LstPatient { set; get; }
         /// <summary>
         /// 检查类型
         /// </summary>
-        public ObservableCollection<CheckTypeModel> lstCheckType { set; get; }
+        public ObservableCollection<CheckTypeModel> LstCheckType { set; get; }
 
         // db初始化
-        private MdcDatabase _db = new MdcDatabase("192.168.2.6", "AnyImageQL");
+        private MdcDatabase _db = null;
 
         public void Init()
         {
-            lstPatient = new ObservableCollection<PatientModel>();
+            _db = new MdcDatabase("192.168.2.6", "AnyImageQL");
+
+            LstPatient = new ObservableCollection<PatientModel>();
             LoadComboBox();
 
-            lstCheckType = new ObservableCollection<CheckTypeModel>();
+            LstCheckType = new ObservableCollection<CheckTypeModel>();
             GetCheckType();
         }
 
@@ -50,16 +52,16 @@ namespace MDKDataReaderV1.Model
         /// </summary>
         public void LoadComboBox()
         {
-            DateType = new ObservableCollection<KeyValuePair<string, string>>();
-            DateType.Add(new KeyValuePair<string, string>("检查日期", "ExamDate"));
+            DateType = new ObservableCollection<KeyValueModel<string, string>>();
+            DateType.Add(new KeyValueModel<string, string>("检查日期", "ExamDate"));
 
-            QueryParam1Name = new ObservableCollection<KeyValuePair<string, string>>();
-            QueryParam1Name.Add(new KeyValuePair<string, string>("姓名", "Name1"));
-            QueryParam1Name.Add(new KeyValuePair<string, string>("性别", "Sex1"));
-            QueryParam1Name.Add(new KeyValuePair<string, string>("年龄", "Age1"));
+            QueryParam1Name = new ObservableCollection<KeyValueModel<string, string>>();
+            QueryParam1Name.Add(new KeyValueModel<string, string>("姓名", "Name1"));
+            QueryParam1Name.Add(new KeyValueModel<string, string>("性别", "Sex1"));
+            QueryParam1Name.Add(new KeyValueModel<string, string>("年龄", "Age1"));
 
-            QueryParam2Name = new ObservableCollection<KeyValuePair<string, string>>();
-            QueryParam2Name.Add(new KeyValuePair<string, string>("住院号", "MID"));
+            QueryParam2Name = new ObservableCollection<KeyValueModel<string, string>>();
+            QueryParam2Name.Add(new KeyValueModel<string, string>("住院号", "MID"));
         }
 
         /// <summary>
@@ -76,7 +78,7 @@ namespace MDKDataReaderV1.Model
                     int nCount = dt.Rows.Count;
                     for (int i = 0; i < nCount; i++)
                     {
-                        lstCheckType.Add(new CheckTypeModel() { Text = dt.Rows[i]["Name"].ToString(), IsChecked = false });
+                        LstCheckType.Add(new CheckTypeModel() { Text = dt.Rows[i]["Name"].ToString(), IsChecked = false });
                     }
                 }
             }
@@ -182,8 +184,9 @@ namespace MDKDataReaderV1.Model
                 DataTable dt = _db.GetDataTable(sSql, sqlPars.ToArray());
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    lstPatient.Clear();
+                    LstPatient.Clear();
                     int nCount = dt.Rows.Count;
+                    int n = 1;
                     for (int i = 0; i < nCount; i++)
                     {
                         int nPId = int.Parse(dt.Rows[i]["ID"]?.ToString());
@@ -195,12 +198,12 @@ namespace MDKDataReaderV1.Model
                         int nMId = int.Parse(dt.Rows[i]["MID"]?.ToString());
                         string sExamDate = dt.Rows[i]["ExamDate"]?.ToString();
 
-                        lstPatient.Add(new PatientModel(i, nPId, sName, sSex, nAge, sEq, sExamItems, nMId, sExamDate));
+                        LstPatient.Add(new PatientModel(n++, nPId, sName, sSex, nAge, sEq, sExamItems, nMId, sExamDate));
                     }
                 }
                 else
                 {
-                    lstPatient.Clear();
+                    LstPatient.Clear();
                 }
             }
             catch (Exception ex) { throw ex; }

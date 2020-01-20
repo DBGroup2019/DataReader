@@ -6,19 +6,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MDKDataReaderV1"
         mc:Ignorable="d"
-        Title="数据浏览Demo" Height="600" Width="950" WindowStartupLocation="CenterScreen" MinWidth="450" MinHeight="250">
+        Title="数据浏览Demo" Height="600" Width="950" WindowStartupLocation="CenterScreen" MinWidth="450" MinHeight="250" WindowState="Maximized">
     <mdk:MDKWindow.TitlePanel>
         <TextBlock Text="数据浏览Demo" VerticalAlignment="Center" Margin="-20,0"/>
     </mdk:MDKWindow.TitlePanel>
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*" MinWidth="300"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*" MinWidth="460"/>
+            <ColumnDefinition Width="340" MinWidth="200"/>
         </Grid.ColumnDefinitions>
         <TabControl>
             <TabItem Header="导航列表">
                 <Grid Name="gNavList">
-                    
+
                 </Grid>
             </TabItem>
             <TabItem Header="标签2">
@@ -47,28 +47,28 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="姓名：" Margin="2" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding CurrentPatient.Name}" Margin="0,2" VerticalAlignment="Center"/>
-                </StackPanel>                          
-                <StackPanel Orientation="Horizontal">  
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="性别：" Margin="2" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding CurrentPatient.Sex}" Margin="0,2" VerticalAlignment="Center"/>
-                </StackPanel>                          
-                <StackPanel Orientation="Horizontal">  
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="年龄：" Margin="2" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding CurrentPatient.Age}" Margin="0,2" VerticalAlignment="Center"/>
-                </StackPanel>                          
-                <StackPanel Orientation="Horizontal">  
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="检查类别：" Margin="2" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding CurrentPatient.CheckType}" Margin="0,2" VerticalAlignment="Center"/>
-                </StackPanel>                          
-                <StackPanel Orientation="Horizontal">  
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="检查项目：" Margin="2" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding CurrentPatient.CheckItem}" Margin="0,2" VerticalAlignment="Center"/>
-                </StackPanel>                          
-                <StackPanel Orientation="Horizontal">  
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="住院号：" Margin="2" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding CurrentPatient.ZhuYuanNo}" Margin="0,2" VerticalAlignment="Center"/>
-                </StackPanel>                          
-                <StackPanel Orientation="Horizontal">  
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="检查日期：" Margin="2" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding CurrentPatient.CheckDate}" Margin="0,2" VerticalAlignment="Center"/>
                 </StackPanel>

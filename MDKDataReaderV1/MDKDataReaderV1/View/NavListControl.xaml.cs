@@ -20,8 +20,8 @@ namespace MDKDataReaderV1.View
     /// </summary>
     public partial class NavListControl : UserControl
     {
-        public event Action<PatientModel> ChangePatient = null;    //选中datagrid行事件
-        QueryManager queryMgr = new QueryManager();
+        public event Action<PatientModel> EveChangePatient;    //选中datagrid行事件
+        QueryManager m_queryMgr = new QueryManager();
 
         public NavListControl()
         {
@@ -29,10 +29,10 @@ namespace MDKDataReaderV1.View
 
             try
             {
-                queryMgr.Init();
-                this.DataContext = queryMgr;
+                m_queryMgr.Init();
+                this.DataContext = m_queryMgr;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -49,9 +49,9 @@ namespace MDKDataReaderV1.View
         {
             DataGrid dg = sender as DataGrid;
             PatientModel mo = dg.CurrentItem as PatientModel;
-            if (ChangePatient != null)
+            if (EveChangePatient != null)
             {
-                ChangePatient(mo);
+                EveChangePatient(mo);
             }
         }
 
@@ -80,7 +80,7 @@ namespace MDKDataReaderV1.View
                     queries.QueryParam2IsContain = (bool)ckbContain2.IsChecked;
                 }
 
-                foreach (var item in queryMgr.lstCheckType)
+                foreach (var item in m_queryMgr.LstCheckType)
                 {
                     if (item.IsChecked)
                     {
@@ -88,7 +88,7 @@ namespace MDKDataReaderV1.View
                     }
                 }
 
-                queryMgr.GetPatient(queries);
+                m_queryMgr.GetPatient(queries);
             }
             catch (Exception ex)
             {
@@ -191,5 +191,30 @@ namespace MDKDataReaderV1.View
         {
         }
 
+        private void txtPar1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (!string.IsNullOrEmpty(textBox.Text))
+            {
+                ckbPar1.IsChecked = true;
+            }
+            else
+            {
+                ckbPar1.IsChecked = false;
+            }
+        }
+
+        private void txtPar2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (!string.IsNullOrEmpty(textBox.Text))
+            {
+                ckbPar2.IsChecked = true;
+            }
+            else
+            {
+                ckbPar2.IsChecked = false;
+            }
+        }
     }
 }

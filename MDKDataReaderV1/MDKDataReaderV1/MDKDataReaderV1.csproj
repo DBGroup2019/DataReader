@@ -63,6 +63,7 @@
     <Compile Include="Model\QueryManager.cs" />
     <Compile Include="Model\QueryModel.cs" />
     <Compile Include="ViewModel\CheckTypeModel.cs" />
+    <Compile Include="ViewModel\KeyValueModel.cs" />
     <Compile Include="View\NavListControl.xaml.cs">
       <DependentUpon>NavListControl.xaml</DependentUpon>
     </Compile>

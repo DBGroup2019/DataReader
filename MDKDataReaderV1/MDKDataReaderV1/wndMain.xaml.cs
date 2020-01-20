@@ -27,7 +27,7 @@ namespace MDKDataReaderV1
             InitializeComponent();
             NavListControl nav = new NavListControl();
             gNavList.Children.Add(nav);
-            nav.ChangePatient += ChangePatient;
+            nav.EveChangePatient += ChangePatient;
             
         }
         

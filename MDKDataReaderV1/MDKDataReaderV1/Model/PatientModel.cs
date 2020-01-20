@@ -7,20 +7,6 @@ namespace MDKDataReaderV1.Model
 {
     public class PatientModel
     {
-        public PatientModel(int nIndex, int nPaintenID, string sName, string sSex, int nAge, string sCheckType, string sCheckItem, int nZYNo, string sCheckDate)
-        {
-            Index = nIndex;
-            PatientID = nPaintenID;
-            Name = sName;
-            Sex = sSex;
-            Age = nAge;
-            CheckType = sCheckType;
-            CheckItem = sCheckItem;
-            ZhuYuanNo = nZYNo;
-            CheckDate = sCheckDate;
-        }
-
-
         /// <summary>
         /// 序号
         /// </summary>
@@ -65,5 +51,18 @@ namespace MDKDataReaderV1.Model
         /// 检查日期
         /// </summary>
         public string CheckDate { set; get; }
+
+        public PatientModel(int nIndex, int nPaintenID, string sName, string sSex, int nAge, string sCheckType, string sCheckItem, int nZYNo, string sCheckDate)
+        {
+            Index = nIndex;
+            PatientID = nPaintenID;
+            Name = sName;
+            Sex = sSex;
+            Age = nAge;
+            CheckType = sCheckType;
+            CheckItem = sCheckItem;
+            ZhuYuanNo = nZYNo;
+            CheckDate = sCheckDate;
+        }
     }
 }

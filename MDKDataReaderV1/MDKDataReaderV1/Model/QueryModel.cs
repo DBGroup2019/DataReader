@@ -49,6 +49,13 @@ namespace MDKDataReaderV1.Model
         /// <summary>
         /// 检查类型
         /// </summary>
-        public List<string> CheckType = new List<string>();
+        public List<string> CheckType
+        {
+            get { return _CheckType; }
+            set { value = CheckType; }
+        }
+
+        private List<string> _CheckType = new List<string>();
+
     }
 }
